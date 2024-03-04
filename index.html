@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUOTES</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <p id="displayQuote"></p>
+        <p id="authorName"></p>
+        <button id="randQuote">GENERATE NEW QUOTE</button>
+    </main>
+    
+
+
+    <script>
+        
+        const apiUrl = 'https://api.quotable.io/random';
+        const newQuote = document.querySelector('#randQuote');
+
+        newQuote.addEventListener('click', ()=>{
+            let author = document.querySelector('#authorName')
+            let quoteText = document.querySelector('#displayQuote');
+            //emptying all the text 
+            quoteText.innerHTML= '';
+            author.innerHTML = ''
+
+        
+            async function getRandomQuote(url){
+                const response = await fetch(url);
+                let data = await response.json();
+
+                //dom manipulation
+                quoteText.innerHTML += '"'+ data.content+'"';
+                author.innerHTML += "~"+data.author
+            }
+
+            getRandomQuote(apiUrl)
+
+        })
+        
+
+        
+
+
+
+
+
+
+    </script>
+</body>
+</html>
